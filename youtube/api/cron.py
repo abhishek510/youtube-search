@@ -3,6 +3,8 @@ import os
 
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from datetime import datetime
+from . import models
 
 
 YOUTUBE_API_SERVICE_NAME = 'youtube'
@@ -32,19 +34,25 @@ def youtube_pull(key = 'default'):
             q = QUERY,
             part = 'id,snippet',
             maxResults = MAX_RESULT,
-            type = 'video'
+            type = 'video',
+            order = 'date'
         ).execute()
-        for i in search_response.items():
-            print(i)
-        videos = []
     
         for search_result in search_response.get('items', []):
-            videos.append('%s %s %s %s (%s)' % (search_result['snippet']['title'], search_result['snippet']['publishedAt'], search_result['snippet']['thumbnails']['default']['url'],
-            search_result['snippet']['description'], search_result['id']['videoId']))
+            video = models.Videos(title = search_result['snippet']['title'], video_id = search_result['id']['videoId'], 
+            description = search_result['snippet']['description'], thumbnail_url = search_result['snippet']['thumbnails']['default']['url'], 
+            published_date = search_result['snippet']['publishedAt'])
+            video.save()
+            print(video.__str__())
     except HttpError as e:
         if e.resp.status == 403:
+            print("Quota exceeded for key ", api_key, " trying next")
             youtube_pull(api_key)
         if e.resp.status == 400:
-            print("Invalid api key")
+            print(e.resp)
+            print("-----------------------Invalid api key----------------------- ", api_key)
+            youtube_pull(api_key)
+            
     
-    print('Videos:\n', '\n'.join(videos), '\n')
+
+    print('-----------------------------------------------------------------------------------------------------')
