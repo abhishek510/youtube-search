@@ -1,0 +1,13 @@
+  
+<!DOCTYPE html>
+<html>
+    <body>
+        <div>
+        <form action="search_videos" method="POST" enctype="multipart/form-data">
+            {% csrf_token %} 
+            Enter search parameters(seperated by ,) <input type="text" name="query"><br>
+            <input type="submit">
+        </form>
+    </div>
+    </body>
+</html>
