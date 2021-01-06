@@ -6,6 +6,7 @@ sudo -H gedit /etc/environment
     add-> API_KEY="<your keys here seperated by commas>"
     logout and login to work
 
+python manage.py crontab add
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
