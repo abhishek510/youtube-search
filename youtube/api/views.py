@@ -6,6 +6,7 @@ from django.contrib.postgres.search import SearchQuery, SearchVector
 
 # Create your views here.
 
+# view to display all videos in descending order of publishing datetime, paginated with 10 items
 def index(request):
     video_list = models.Videos.objects.order_by('-published_date')
     page = request.GET.get('page', 1)
@@ -21,6 +22,8 @@ def index(request):
 
     return render(request, 'video_display.html', {'videos':videos})
 
+
+#to enable optimised search database was changed from sqlite to postgres as it supports full text search on multiple columns with multiple keywords
 def search_videos(request):
     if request.method == 'POST':
         query_list = request.POST.get('query')

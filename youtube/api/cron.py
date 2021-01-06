@@ -12,6 +12,8 @@ YOUTUBE_API_VERSION = 'v3'
 QUERY = 'cricket'
 MAX_RESULT = 20
 
+#fetch the key list from environment variable if the previous key threw 400 or 403 i.e. invalid key or quota exceeded then try with next key. Add 1 to index and 
+#get reaminder after dividing from length to get the next item in circular order.
 def get_key(para):
     API_KEYS = os.environ['API_KEY'].split(',')
     if para == 'default':

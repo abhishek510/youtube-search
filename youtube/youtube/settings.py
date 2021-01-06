@@ -128,6 +128,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
+#cron runs every minute to pull data from youtube and logs the output to cron.log
 CRONJOBS = [
     ('*/1 * * * *', 'api.cron.youtube_pull', '>> '+os.path.join(BASE_DIR,'logs/cron.log'))
 ]
