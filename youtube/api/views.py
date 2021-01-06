@@ -24,7 +24,7 @@ def index(request):
 def search_videos(request):
     if request.method == 'POST':
         query_list = request.POST.get('query')
-        query_split_list = query_list.split(',')
+        query_split_list = query_list.split(' ')
         a = "SearchQuery('"
         m='search='
         for query in  query_split_list:
