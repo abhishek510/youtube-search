@@ -9,3 +9,7 @@ sudo -H gedit /etc/environment
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
+
+setup docker - 
+https://docs.docker.com/compose/install/
+https://docs.docker.com/compose/django/
