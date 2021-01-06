@@ -1,0 +1,11 @@
+install dependencies from requirements.txt
+install postgreSQL follow-(https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-16-04#install-the-components-from-the-ubuntu-repositories)
+Make sure created user and user in youtube/settings.py are same for database.
+
+sudo -H gedit /etc/environment
+    add-> API_KEY="<your keys here seperated by commas>"
+    logout and login to work
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
